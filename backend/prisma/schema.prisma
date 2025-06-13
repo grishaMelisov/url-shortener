@@ -8,7 +8,7 @@ datasource db {
 }
 
 model ShortUrl {
-  id          String           @id @default(cuid())
+  id          Int              @id @default(autoincrement())
   originalUrl String
   shortUrl    String           @unique
   createdAt   DateTime         @default(now())
@@ -20,9 +20,9 @@ model ShortUrl {
 }
 
 model ClickAnalytics {
-  id         String   @id @default(cuid())
+  id         Int      @id @default(autoincrement())
   shortUrl   ShortUrl @relation(fields: [shortUrlId], references: [id], onDelete: Cascade)
-  shortUrlId String
+  shortUrlId Int
   clickedAt  DateTime @default(now())
   ipAddress  String
 }
