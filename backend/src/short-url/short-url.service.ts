@@ -5,17 +5,15 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateShortUrlDto } from './dto/create-short-url.dto';
-// import { customAlphabet } from 'nanoid';
+import generateAlias from '../utils/generate-alias';
 
 @Injectable()
 export class ShortUrlService {
   constructor(private prisma: PrismaService) {}
 
   async create(dto: CreateShortUrlDto) {
-    const generateId = () => Math.random().toString(36).substring(2, 8);
-
     const { originalUrl, alias, expiresAt } = dto;
-    const short = alias || generateId();
+    const short = alias || generateAlias();
     const existing = await this.prisma.shortUrl.findUnique({
       where: { shortUrl: short },
     });

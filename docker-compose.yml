@@ -46,6 +46,16 @@ services:
             POSTGRES_DB: urlshortener
         volumes:
             - pgdata:/var/lib/postgresql/data
+    backend:
+        build:
+            context: .
+            dockerfile: backend/Dockerfile
+        ports:
+            - '4200:4200'
+        environment:
+            - DATABASE_URL=postgresql://user:password@postgres:5432/urlshortener?schema=public
+        depends_on:
+            - postgres
 
 volumes:
     pgdata:
