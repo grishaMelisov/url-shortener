@@ -1,0 +1,110 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-soft-grey: #959298;
+  --color-soft-black: #1f1f1f;
+  --color-hot-rod: #e83737;
+  --color-ghost-white: #f9f9f9;
+  --color-smoky-black: #0d0d0d0d;
+
+  --color-shadow: var(--color-soft-black);
+  --color-background: #fff;
+  --color-shadow-error: var(--color-hot-rod);
+
+  --max-content-width: 1440px;
+
+  /* Typography */
+  --line-height-title-md: 20px;
+  --line-height-text: 18px;
+
+  --font-size-title-md: 20px;
+  --font-size-text: 18px;
+
+  --font-wieght-title-md: 700;
+  --font-wieght-text: 400;
+
+  --color-text-primary: var(--color-soft-black);
+
+  /* Breakpoints */
+  --breakpoint-sm: 744px;
+  --breakpoint-md: 1128px;
+  --breakpoint-lg: 1440px;
+
+  /* Radius */
+  --radius-lg: 12px;
+}
+
+@layer base {
+  a {
+    cursor: pointer;
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
+  body {
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 400;
+
+    background-color: var(--color-background);
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h3 {
+    font-weight: var(--font-wieght-title-md);
+    font-size: var(--font-size-title-md);
+    line-height: var(--line-height-title-md);
+    vertical-align: bottom;
+    color: var(--color-text-primary);
+  }
+
+  p {
+    font-weight: var(--font-wieght-text);
+    font-size: var(--font-size-text);
+    line-height: var(--line-height-text);
+    vertical-align: bottom;
+    color: var(--color-text-primary);
+  }
+}
+
+@layer utilities {
+  .explore-shell {
+    padding-inline: var(--explore_padding-inline);
+    max-width: var(--max-content-width, 2520px);
+    margin-inline: auto;
+
+    @media (min-width: 744px) {
+      --explore_padding-inline: 40px;
+    }
+
+    @media (min-width: 1128px) {
+      --explore_padding-inline: 40px;
+    }
+
+    @media (min-width: 1440px) {
+      --explore_padding-inline: 80px;
+    }
+  }
+
+  @keyframes pulseSmooth {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .animate-pulse-smooth {
+    animation: pulseSmooth 2s ease-in-out infinite;
+  }
+}
