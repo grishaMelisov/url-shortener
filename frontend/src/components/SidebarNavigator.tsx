@@ -1,4 +1,3 @@
-// components/SidebarNavigator.tsx
 import { useState } from 'react';
 import clsx from 'clsx';
 
