@@ -1,40 +1,3 @@
-# services:
-#     postgres:
-#         image: postgres:16
-#         restart: always
-#         environment:
-#             POSTGRES_USER: user
-#             POSTGRES_PASSWORD: password
-#             POSTGRES_DB: urlshortener
-#         volumes:
-#             - pgdata:/var/lib/postgresql/data
-#         ports:
-#             - '5432:5432'
-
-#     backend:
-#         build: ./backend
-#         depends_on:
-#             - postgres
-#         environment:
-#             DATABASE_URL: postgres://user:password@postgres:5432/urlshortener
-#         ports:
-#             - '4200:4200'
-#         volumes:
-#             - ./backend:/app
-#         command: sh -c "npx prisma migrate deploy && npm run start:prod"
-
-#     frontend:
-#         build: ./frontend
-#         ports:
-#             - '5173:5173'
-#         volumes:
-#             - ./frontend:/app
-#         depends_on:
-#             - backend
-
-# volumes:
-#     pgdata:
-
 services:
     postgres:
         image: postgres:16
@@ -56,6 +19,14 @@ services:
             - DATABASE_URL=postgresql://user:password@postgres:5432/urlshortener?schema=public
         depends_on:
             - postgres
+    frontend:
+        build:
+            context: .
+            dockerfile: frontend/Dockerfile
+        ports:
+            - '5173:80'
+        depends_on:
+            - backend
 
 volumes:
     pgdata:
